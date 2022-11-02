@@ -1,2 +1,18 @@
 @import "Container";
 @import "Card";
+
+.app {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.fb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
