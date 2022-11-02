@@ -1,0 +1,12 @@
+.card {
+  padding: 20px;
+  font-size: 16px;
+  width: 400px;
+  background-color: blanchedalmond;
+  box-sizing: border-box;
+
+  @include mobile {
+    width: 50%;
+    background: red;
+  }
+}

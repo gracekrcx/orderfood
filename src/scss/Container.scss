@@ -1,0 +1,15 @@
+@mixin mobile {
+  @media (max-width: 740px) {
+    @content;
+  }
+}
+
+.container {
+  width: 700px;
+  background-color: chocolate;
+  margin: 0 auto;
+
+  @include mobile {
+    width: 100%;
+  }
+}
