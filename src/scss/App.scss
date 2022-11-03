@@ -1,5 +1,6 @@
 @import "Container";
 @import "Card";
+@import "CustomPopup";
 
 .app {
   width: 700px;
@@ -46,4 +47,16 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+.br10 {
+  border-radius: 10px;
+}
+
+.w30 {
+  width: 30px;
+}
+
+.ml8 {
+  margin-left: 8px;
 }

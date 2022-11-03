@@ -1,4 +1,5 @@
 import imagePlaceholder from "../images/empty.jpg";
+import { getLocalStorage } from "../utils/Utils";
 
 function Product() {
   const list = [
@@ -23,12 +24,12 @@ function Product() {
       {list.map((item) => {
         const { name, price, imageWebp, imagejpg } = item;
         return (
-          <div className="card">
+          <div className="card" key={name}>
             <div className="imgBox">
               <picture>
                 <source
                   className="img cover"
-                  srcset={imageWebp}
+                  srcSet={imageWebp}
                   type="image/webp"
                 />
                 <img
