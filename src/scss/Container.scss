@@ -5,8 +5,9 @@
 }
 
 .container {
-  background-color: chocolate;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 
   @include mobile {
     width: 100%;
