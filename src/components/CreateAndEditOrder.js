@@ -99,7 +99,7 @@ const CreateAndEditOrder = ({
             />
           </div>
           <div>
-            <button className="btn" onClick={handleAddOrder}>
+            <button className="addProduct" onClick={handleAddOrder}>
               {`新增${singleOrder.quantity}項商品至訂單 • ${currency}${
                 price * singleOrder.quantity
               }`}
