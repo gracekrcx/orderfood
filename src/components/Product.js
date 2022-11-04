@@ -1,15 +1,20 @@
+import { useState } from "react";
 import imagePlaceholder from "../images/empty.jpg";
 import { getLocalStorage } from "../utils/Utils";
+import CustomPopup from "../components/CustomPopup";
+import CreateAndEditOrder from "../components/CreateAndEditOrder";
 
 function Product() {
   const list = [
     {
+      id: 1,
       name: "咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐",
-      price: 199,
+      price: 193,
       imageWebp: "/images/kfc/webp/01.webp",
       imagejpg: "/images/kfc/jpg/01.jpeg",
     },
     {
+      id: 2,
       name: "咔啦雞腿堡XL",
       price: 120,
       imageWebp: null,
@@ -18,13 +23,39 @@ function Product() {
   ];
 
   const currency = "$";
+  const [isPopUp, setIsPopUp] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+
+  const togglePopUp = () => {
+    setIsPopUp(!isPopUp);
+  };
+
+  const handleProductClick = (id) => {
+    console.log("------> 商品 id", id);
+    const data = list.find((item) => item.id === id);
+
+    setSelectedData(data);
+    setIsPopUp(!isPopUp);
+  };
 
   return (
     <>
+      {isPopUp && (
+        <CustomPopup onClose={togglePopUp}>
+          <CreateAndEditOrder
+            onClose={togglePopUp}
+            selectedData={selectedData}
+          />
+        </CustomPopup>
+      )}
       {list.map((item) => {
-        const { name, price, imageWebp, imagejpg } = item;
+        const { id, name, price, imageWebp, imagejpg } = item;
         return (
-          <div className="card" key={name}>
+          <div
+            className="card"
+            key={name}
+            onClick={() => handleProductClick(id)}
+          >
             <div className="imgBox">
               <picture>
                 <source

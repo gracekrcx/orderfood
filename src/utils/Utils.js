@@ -4,7 +4,6 @@ export function setLocalStorage(item, value) {
 }
 
 export function getLocalStorage(item) {
-  console.log("Get");
-  const data = localStorage.getItem(item);
-  console.log(data);
+  const data = JSON.parse(localStorage.getItem(item));
+  return data;
 }

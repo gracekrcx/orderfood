@@ -1,6 +1,8 @@
 @import "Container";
 @import "Card";
 @import "CustomPopup";
+@import "CreateAndEditOrder";
+@import "ShoppingCard";
 
 .app {
   width: 700px;
@@ -33,12 +35,24 @@
   font-size: 16px;
 }
 
+.t20 {
+  font-size: 20px;
+}
+
 .tg8 {
   color: #4e535a;
 }
 
 .mv2 {
   margin: 2px 0;
+}
+
+.mv10 {
+  margin: 10px 0;
+}
+
+.db {
+  display: block;
 }
 
 .ellipsis {
@@ -49,12 +63,22 @@
   -webkit-box-orient: vertical;
 }
 
+.single-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .br10 {
   border-radius: 10px;
 }
 
 .w30 {
   width: 30px;
+}
+
+.wp90 {
+  width: 90%;
 }
 
 .ml8 {
