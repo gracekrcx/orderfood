@@ -1,0 +1,79 @@
+.ml10 {
+  margin-left: 10px;
+}
+
+.mp0 {
+  padding: 0;
+  margin: 0;
+}
+
+.t16 {
+  font-size: 16px;
+}
+
+.t20 {
+  font-size: 20px;
+}
+
+.tg8 {
+  color: #4e535a;
+}
+
+.mv2 {
+  margin: 2px 0;
+}
+
+.mv10 {
+  margin: 10px 0;
+}
+
+.br10 {
+  border-radius: 10px;
+}
+
+.w30 {
+  width: 30px;
+}
+
+.wp90 {
+  width: 90%;
+}
+
+.ml8 {
+  margin-left: 8px;
+}
+
+.db {
+  display: block;
+}
+
+.fb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ellipsis {
+  width: 90%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.single-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+
+  @include mobile {
+    width: 100%;
+  }
+}

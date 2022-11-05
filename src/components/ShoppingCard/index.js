@@ -1,7 +1,7 @@
 import { useState } from "react";
-import closs from "../images/close.svg";
-import CreateAndEditOrder from "./CreateAndEditOrder";
-import { getLocalStorage } from "../utils/Utils";
+import closs from "../../images/close.svg";
+import CreateAndEditOrder from "../CreateAndEditOrder";
+import { getLocalStorage } from "../../utils/Utils";
 
 const ShoppingCard = ({ onClose }) => {
   const [isShowOrder, setIsShowOrder] = useState(true);

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import goBack from "../images/goBack.svg";
-import { getLocalStorage, setLocalStorage } from "../utils/Utils";
+import { useState } from "react";
+import goBack from "../../images/goBack.svg";
+import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
 
 // showOrder : edit 時返回購物車
 // Q : 如果 showOrder 沒有傳 default 傳 NULL 對嗎?
@@ -12,7 +12,6 @@ const CreateAndEditOrder = ({
   onClose = null,
 }) => {
   const currency = "$";
-
   const { name, price } = selectedData;
   const [singleOrder, setSingleOrder] = useState({
     name: name,
@@ -21,27 +20,6 @@ const CreateAndEditOrder = ({
     notes: "",
     customer: "",
   });
-
-  useEffect(() => {
-    const preData = [
-      {
-        name: "雞排",
-        price: 80,
-        quantity: 1,
-        notes: "加辣",
-        customer: "Morrison",
-      },
-    ];
-
-    setLocalStorage("order", preData);
-  }, []);
-
-  const handleAddOrder = () => {
-    const oldData = getLocalStorage("order");
-    const newData = [...oldData, singleOrder];
-    setLocalStorage("order", newData);
-    onClose();
-  };
 
   const handleQuantity = (e) => {
     setSingleOrder((preData) => {
@@ -53,6 +31,13 @@ const CreateAndEditOrder = ({
     setSingleOrder((preData) => {
       return { ...preData, [e.target.name]: e.target.value };
     });
+  };
+
+  const handleAddOrder = () => {
+    const oldData = getLocalStorage("order");
+    const newData = [...oldData, singleOrder];
+    setLocalStorage("order", newData);
+    onClose();
   };
 
   return (

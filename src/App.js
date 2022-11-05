@@ -1,36 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "./scss/App.scss";
-import Product from "./components/Product";
-import logo from "../src/images/shopping-cart.svg";
-import { setLocalStorage } from "../src/utils/Utils";
-import CustomPopup from "./components/CustomPopup";
-import ShoppingCard from "./components/ShoppingCard";
+import Products from "./components/Products";
+import Header from "./components/Header";
+import { setLocalStorage } from "./utils/Utils";
 
 function App() {
-  const [isPopUp, setIsPopUp] = useState(false);
+  useEffect(() => {
+    const preData = [
+      {
+        name: "雞排",
+        price: 80,
+        quantity: 1,
+        notes: "加辣",
+        customer: "Morrison",
+      },
+    ];
 
-  const togglePopUp = () => {
-    // setLocalStorage("exam", { a: 1, b: 2, c: 3 });
-    setIsPopUp(!isPopUp);
-  };
+    setLocalStorage("order", preData);
+  }, []);
 
   return (
     <div className="app">
-      {isPopUp && (
-        <CustomPopup onClose={togglePopUp}>
-          <ShoppingCard onClose={togglePopUp} />
-        </CustomPopup>
-      )}
-      <header className="fb">
-        <h1>Order Food</h1>
-        <button className="btn" onClick={togglePopUp}>
-          <img className="shoppingLogo" src={logo} alt="shopping" />
-          <span className="ml10">購物車</span>
-        </button>
-      </header>
-      <div className="container">
-        <Product />
-      </div>
+      <Header />
+      <Products />
     </div>
   );
 }
