@@ -32,6 +32,7 @@ const ShoppingCard = ({ onClose }) => {
   const handleFinisheOrder = () => {
     setSuccess(true);
     setLocalStorage("order", []);
+    setLocalStorage("totalPrice", 0);
     setIsHaveOrder(false);
     setTimeout(() => {
       onClose();
