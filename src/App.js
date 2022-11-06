@@ -3,27 +3,21 @@ import "./scss/App.scss";
 import Products from "./components/Products";
 import Header from "./components/Header";
 import { setLocalStorage } from "./utils/Utils";
+import StoreContextProvider from "./context/store";
 
 function App() {
   useEffect(() => {
-    const preData = [
-      {
-        name: "雞排",
-        price: 80,
-        quantity: 1,
-        notes: "加辣",
-        customer: "Morrison",
-      },
-    ];
-
-    setLocalStorage("order", preData);
+    const currency = "$";
+    setLocalStorage("currency", currency);
   }, []);
 
   return (
-    <div className="app">
-      <Header />
-      <Products />
-    </div>
+    <StoreContextProvider>
+      <div className="app">
+        <Header />
+        <Products />
+      </div>
+    </StoreContextProvider>
   );
 }
 

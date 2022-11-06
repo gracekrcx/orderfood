@@ -3,26 +3,10 @@ import imagePlaceholder from "../../images/empty.jpg";
 import { getLocalStorage } from "../../utils/Utils";
 import CustomPopup from "../CustomPopup";
 import CreateAndEditOrder from "../CreateAndEditOrder";
-
-const list = [
-  {
-    id: 1,
-    name: "咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐咔啦雞腿堡XL套餐",
-    price: 193,
-    imageWebp: "/images/kfc/webp/01.webp",
-    imagejpg: "/images/kfc/jpg/01.jpeg",
-  },
-  {
-    id: 2,
-    name: "咔啦雞腿堡XL",
-    price: 120,
-    imageWebp: null,
-    imagejpg: null,
-  },
-];
+import { productList } from "../../utils/common";
 
 function Product() {
-  const currency = "$";
+  const currency = getLocalStorage("currency");
   const [isPopUp, setIsPopUp] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
@@ -31,8 +15,7 @@ function Product() {
   };
 
   const handleProductClick = (id) => {
-    console.log("------> 商品 id", id);
-    const data = list.find((item) => item.id === id);
+    const data = productList.find((item) => item.id === id);
     setSelectedData(data);
     setIsPopUp(!isPopUp);
   };
@@ -48,11 +31,11 @@ function Product() {
         </CustomPopup>
       )}
       <div className="container">
-        {list.map((item) => {
+        {productList.map((item) => {
           const { id, name, price, imageWebp, imagejpg } = item;
           return (
             <div
-              className="card"
+              className="card mb15"
               key={name}
               onClick={() => handleProductClick(id)}
             >

@@ -1,9 +1,78 @@
 import { useState } from "react";
 import goBack from "../../images/goBack.svg";
-import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  calculateTotalPrice,
+} from "../../utils/Utils";
+import { useStore } from "../../context/store";
 
 // showOrder : edit 時返回購物車
 // Q : 如果 showOrder 沒有傳 default 傳 NULL 對嗎?
+
+const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
+  const number = Array.from({ length: 20 }, (_, i) => i + 1);
+  return (
+    <select className="select t20" value={quantity} onChange={handleQuantity}>
+      {isEdit && <option value="delete">移除</option>}
+      {number.map((i) => (
+        <option value={i} key={i}>
+          {i}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+const Customer = ({ customer, handleInputChange }) => {
+  return (
+    <div className="mv10">
+      <label htmlFor="customer" className="db">
+        訂購人姓名
+      </label>
+      <input
+        type="text"
+        name="customer"
+        autoComplete="off"
+        value={customer}
+        onChange={handleInputChange}
+      />
+    </div>
+  );
+};
+
+const Notes = ({ notes, handleInputChange }) => {
+  return (
+    <div className="mv10">
+      <label htmlFor="notes" className="db">
+        商品備註
+      </label>
+      <textarea
+        name="notes"
+        rows="3"
+        className="notesArea"
+        defaultValue={notes}
+        onChange={handleInputChange}
+      />
+    </div>
+  );
+};
+
+const DeleteConfirm = ({ handleDeleteOrder, handleCancleDelete }) => {
+  return (
+    <div className="deleteAlert">
+      <span className="deleteText">確定刪除</span>
+      <div className="deleteButtonGroup">
+        <button className="deleteButton" onClick={handleDeleteOrder}>
+          確定
+        </button>
+        <button className="deleteButton" onClick={handleCancleDelete}>
+          取消
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const CreateAndEditOrder = ({
   selectedData = null,
@@ -11,20 +80,30 @@ const CreateAndEditOrder = ({
   showOrder = null,
   onClose = null,
 }) => {
-  const currency = "$";
-  const { name, price } = selectedData;
+  const { setIsHaveOrder } = useStore();
+  const currency = getLocalStorage("currency");
+  const oldData = getLocalStorage("order") || [];
+  // selectedData
+  // 新增：name, price
+  // 修改：name, price, quantity, customer, notes, orderId
+  const { name, price, quantity = 1, customer = "", notes = "" } = selectedData;
   const [singleOrder, setSingleOrder] = useState({
     name: name,
     price: price,
-    quantity: 1,
-    notes: "",
-    customer: "",
+    quantity: quantity,
+    notes: notes,
+    customer: customer,
   });
+  const [isShowDeleteAlert, setIsShowDeleteAlert] = useState(false);
 
   const handleQuantity = (e) => {
-    setSingleOrder((preData) => {
-      return { ...preData, quantity: parseInt(e.target.value, 10) };
-    });
+    if (e.target.value === "delete") {
+      setIsShowDeleteAlert(true);
+    } else {
+      setSingleOrder((preData) => {
+        return { ...preData, quantity: parseInt(e.target.value, 10) };
+      });
+    }
   };
 
   const handleInputChange = (e) => {
@@ -33,63 +112,104 @@ const CreateAndEditOrder = ({
     });
   };
 
+  const updateOrderData = (data) => {
+    data.length > 0 ? setIsHaveOrder(true) : setIsHaveOrder(false);
+    setLocalStorage("order", data);
+    calculateTotalPrice(data);
+  };
+
   const handleAddOrder = () => {
-    const oldData = getLocalStorage("order");
-    const newData = [...oldData, singleOrder];
-    setLocalStorage("order", newData);
+    const orderId = Date.now();
+    const newOrder = { ...singleOrder, orderId };
+    const newData = [...oldData, newOrder];
+    updateOrderData(newData);
     onClose();
+  };
+
+  const handleEditOrder = () => {
+    const orderId = selectedData.orderId;
+    // const index = oldData.findIndex((item) => {
+    //   return item.orderId === orderId;
+    // });
+    const updateData = oldData.map((item) => {
+      if (item.orderId === orderId) {
+        return { ...singleOrder, orderId };
+      }
+      return item;
+    });
+    updateOrderData(updateData);
+    showOrder();
+  };
+
+  const handleDeleteOrder = () => {
+    const orderId = selectedData.orderId;
+    const updateData = oldData.filter((item) => {
+      return item.orderId !== orderId;
+    });
+    updateOrderData(updateData);
+    showOrder();
+  };
+
+  const handleCancleDelete = () => {
+    setIsShowDeleteAlert(false);
   };
 
   return (
     <div>
       {isEdit ? (
         <>
+          {isShowDeleteAlert && (
+            <DeleteConfirm
+              handleDeleteOrder={handleDeleteOrder}
+              handleCancleDelete={handleCancleDelete}
+            />
+          )}
           <img
-            className="w30 ml8"
+            className="w30 ml8 cursor"
             src={goBack}
             alt="goBack"
             onClick={showOrder}
           />
-          <span>修改修改修改修改修改</span>
+          <div>
+            <h1 className="single-ellipsis">{name}</h1>
+            <QuantitySelect
+              quantity={singleOrder.quantity}
+              handleQuantity={handleQuantity}
+              isEdit={isEdit}
+            />
+            <Customer
+              customer={singleOrder.customer}
+              handleInputChange={handleInputChange}
+            />
+            <Notes
+              notes={singleOrder.notes}
+              handleInputChange={handleInputChange}
+            />
+            <button className="addProduct" onClick={handleEditOrder}>
+              修改
+            </button>
+          </div>
         </>
       ) : (
         <div>
           <h1 className="single-ellipsis">{name}</h1>
-          <select className="select t20" onChange={handleQuantity}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="55">55</option>
-          </select>
-          <div className="mv10">
-            <label htmlFor="customer" className="db">
-              訂購人姓名
-            </label>
-            <input
-              type="text"
-              name="customer"
-              autoComplete="off"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="mv10">
-            <label htmlFor="notes" className="db">
-              商品備註
-            </label>
-            <textarea
-              name="notes"
-              rows="3"
-              className="wp90"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <button className="addProduct" onClick={handleAddOrder}>
-              {`新增${singleOrder.quantity}項商品至訂單 • ${currency}${
-                price * singleOrder.quantity
-              }`}
-            </button>
-          </div>
+          <QuantitySelect
+            quantity={singleOrder.quantity}
+            handleQuantity={handleQuantity}
+          />
+          <Customer
+            customer={singleOrder.customer}
+            handleInputChange={handleInputChange}
+          />
+          <Notes
+            notes={singleOrder.notes}
+            handleInputChange={handleInputChange}
+          />
+          <button className="addProduct" onClick={handleAddOrder}>
+            {`新增${singleOrder.quantity}項商品至訂單 • ${currency}${
+              price * singleOrder.quantity
+            }`}
+          </button>
         </div>
       )}
     </div>
