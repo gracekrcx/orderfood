@@ -1,12 +1,61 @@
-.detail {
+.empty {
+  height: 220px;
+}
+
+.content {
+  height: calc(100vh - 375px);
+  overflow-y: scroll;
+  padding: 10px 0;
+}
+
+.orderDetail {
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0 auto 10px;
+  font-size: 14px;
+
+  @include mobile {
+    width: 90%;
+  }
+}
+
+.edit {
+  width: 16%;
+  cursor: pointer;
+}
+.orderDescription {
+  width: 84%;
+}
+
+.customer {
+  max-width: 90px;
+  display: inline-block;
+}
+
+.name {
+  width: calc(100% - 90px);
+  display: inline-block;
+}
+
+.notes {
+  width: calc(100% - 120px);
+  display: inline-block;
+}
+
+.successText {
+  font-size: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.successText:last-child {
   font-size: 14px;
 }
 
-.item {
-  width: 50px;
-  padding: 0 10px;
+.successContent {
+  display: flex;
+  height: 200px;
+  flex-wrap: wrap;
+  align-content: center;
 }

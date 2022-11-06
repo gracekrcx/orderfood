@@ -1,16 +1,26 @@
 .shoppingLogo {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .btn {
-    background-color: #000;
-    color: #fff;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 4px 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  
+  width: 20px;
+  height: 20px;
+}
+
+.btn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.haveOrderIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: -11px;
+  left: -8px;
+}
