@@ -5,7 +5,7 @@ import ShoppingCard from "../ShoppingCard";
 import { useStore } from "../../context/store";
 
 const HaveOrderIcon = () => {
-  return <div className="haveOrderIcon" />;
+  return <div className="haveOrderIcon br-c" />;
 };
 
 const Header = () => {
@@ -23,12 +23,12 @@ const Header = () => {
           <ShoppingCard onClose={togglePopUp} />
         </CustomPopup>
       )}
-      <header className="fb">
+      <header className="f-b">
         <h1>Order Food</h1>
-        <button className="btn" onClick={togglePopUp}>
+        <button className="btn br-15" onClick={togglePopUp}>
           <img className="shoppingLogo" src={logo} alt="shopping" />
           {isHaveOrder && <HaveOrderIcon />}
-          <span className="ml10">購物車</span>
+          <span className="ml-10">購物車</span>
         </button>
       </header>
     </>

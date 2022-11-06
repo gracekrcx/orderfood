@@ -1,3 +1,9 @@
+@mixin mobile {
+  @media (max-width: 740px) {
+    @content;
+  }
+}
+
 .overlay {
   height: 100%;
   width: 100%;

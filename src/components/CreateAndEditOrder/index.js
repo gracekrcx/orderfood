@@ -13,7 +13,7 @@ import { useStore } from "../../context/store";
 const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   const number = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
-    <select className="select t20" value={quantity} onChange={handleQuantity}>
+    <select className="select t-20" value={quantity} onChange={handleQuantity}>
       {isEdit && <option value="delete">移除</option>}
       {number.map((i) => (
         <option value={i} key={i}>
@@ -26,7 +26,7 @@ const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
 
 const Customer = ({ customer, handleInputChange }) => {
   return (
-    <div className="mv10">
+    <div className="mv-10">
       <label htmlFor="customer" className="db">
         訂購人姓名
       </label>
@@ -43,7 +43,7 @@ const Customer = ({ customer, handleInputChange }) => {
 
 const Notes = ({ notes, handleInputChange }) => {
   return (
-    <div className="mv10">
+    <div className="mv-10">
       <label htmlFor="notes" className="db">
         商品備註
       </label>
@@ -165,7 +165,7 @@ const CreateAndEditOrder = ({
             />
           )}
           <img
-            className="w30 ml8 cursor"
+            className="w-30 ml-8 cursor"
             src={goBack}
             alt="goBack"
             onClick={showOrder}

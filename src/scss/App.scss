@@ -5,11 +5,10 @@
 }
 
 @import "../components/Products/index.scss";
-@import "../components/CustomPopup/index.scss";
 @import "../components/CreateAndEditOrder/index.scss";
 @import "../components/ShoppingCard/index.scss";
 @import "../components/Header/index.scss";
-@import 'Common';
+@import "Global";
 
 .app {
   width: 700px;

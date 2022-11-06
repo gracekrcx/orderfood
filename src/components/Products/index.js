@@ -35,7 +35,7 @@ function Product() {
           const { id, name, price, imageWebp, imagejpg } = item;
           return (
             <div
-              className="card mb15"
+              className="card mb-15"
               key={name}
               onClick={() => handleProductClick(id)}
             >
@@ -53,8 +53,8 @@ function Product() {
                   />
                 </picture>
               </div>
-              <h1 className="mv2 t16 ellipsis">{name}</h1>
-              <h1 className="mp0 t16 tg8">{`${currency}${price}`}</h1>
+              <h1 className="mv-2 t-16 ellipsis">{name}</h1>
+              <h1 className="mp0 t-16 tg-80">{`${currency}${price}`}</h1>
             </div>
           );
         })}

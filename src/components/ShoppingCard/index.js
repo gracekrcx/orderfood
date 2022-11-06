@@ -6,7 +6,7 @@ import { useStore } from "../../context/store";
 
 const CloseIcon = ({ onClose }) => {
   return (
-    <img className="w30 cursor" src={closs} alt="closs" onClick={onClose} />
+    <img className="w-30 cursor" src={closs} alt="closs" onClick={onClose} />
   );
 };
 
@@ -54,7 +54,7 @@ const ShoppingCard = ({ onClose }) => {
     return (
       <div>
         <CloseIcon onClose={onClose} />
-        <div className="empty fc">
+        <div className="empty f-c">
           <span>目前無資料</span>
         </div>
       </div>
@@ -74,22 +74,22 @@ const ShoppingCard = ({ onClose }) => {
                     編輯
                   </button>
                   <div className="orderDescription">
-                    <div className="fs w100">
+                    <div className="f-s w-100">
                       {item.customer && (
-                        <span className="customer single-ellipsis p5">
+                        <span className="customer single-ellipsis ph-5">
                           {`${item.customer} /`}
                         </span>
                       )}
-                      <span className="name single-ellipsis p5">
+                      <span className="name single-ellipsis ph-5">
                         {item.name}
                       </span>
                     </div>
-                    <div className="fs w100">
-                      <span className="p5">{`${item.quantity}份`}</span>
-                      <span className="p5">{`${currency}${
+                    <div className="f-s w-100">
+                      <span className="ph-5">{`${item.quantity}份`}</span>
+                      <span className="ph-5">{`${currency}${
                         item.price * item.quantity
                       }`}</span>
-                      <span className="notes single-ellipsis p5">
+                      <span className="notes single-ellipsis ph-5">
                         {item.notes}
                       </span>
                     </div>
