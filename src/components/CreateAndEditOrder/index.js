@@ -10,13 +10,12 @@ import {
 import { useStore } from "../../context/store";
 
 // showOrder : edit 時返回購物車
-// Q : 如果 showOrder 沒有傳 default 傳 NULL 對嗎?
 
 const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   const number = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
     <select
-      className={`${styled.select} t-20`}
+      className={`${styled.select} t-20 cursor`}
       value={quantity}
       onChange={handleQuantity}
     >

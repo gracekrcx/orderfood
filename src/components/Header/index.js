@@ -26,7 +26,10 @@ const Header = () => {
       )}
       <header className="f-b">
         <h1>Order Food</h1>
-        <button className={`${styled.btn} br-15 f-c`} onClick={togglePopUp}>
+        <button
+          className={`${styled.btn} br-15 f-c cursor`}
+          onClick={togglePopUp}
+        >
           <img className={styled.shoppingLogo} src={logo} alt="shopping" />
           {isHaveOrder && <HaveOrderIcon />}
           <span className="ml-10">購物車</span>
