@@ -1,6 +1,8 @@
 import { useState } from "react";
+import styled from "./index.module.scss";
 import closs from "../../images/close.svg";
 import CreateAndEditOrder from "../CreateAndEditOrder";
+import CustomButton from "../CustomButton";
 import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
 import { useStore } from "../../context/store";
 
@@ -41,11 +43,11 @@ const ShoppingCard = ({ onClose }) => {
 
   if (success) {
     return (
-      <div className="message">
+      <div className={styled.message}>
         <CloseIcon onClose={onClose} />
-        <div className="successContent f-w-c">
-          <span className="successText">訂單已送出</span>
-          <span className="successText">2 秒後關閉</span>
+        <div className={`${styled.successContent} f-w-c`}>
+          <span className={styled.successText}>訂單已送出</span>
+          <span className={styled.successText}>2 秒後關閉</span>
         </div>
       </div>
     );
@@ -53,9 +55,9 @@ const ShoppingCard = ({ onClose }) => {
 
   if (!data || data.length === 0) {
     return (
-      <div className="message">
+      <div className={styled.message}>
         <CloseIcon onClose={onClose} />
-        <div className="emptyContent f-c">
+        <div className={`${styled.emptyContent} f-c`}>
           <span>目前無資料</span>
         </div>
       </div>
@@ -63,25 +65,30 @@ const ShoppingCard = ({ onClose }) => {
   }
 
   return (
-    <div>
+    <div className={styled.message}>
       {isShowOrder ? (
-        <div className="orderContainer">
+        <div className={styled.orderContainer}>
           <CloseIcon onClose={onClose} />
-          <div className="content">
+          <div className={styled.content}>
             {data.map((item, index) => {
               return (
-                <div className="orderDetail mb-10" key={index}>
-                  <button className="edit" onClick={() => edit(item.orderId)}>
+                <div className={`${styled.orderDetail} mb-10`} key={index}>
+                  <button
+                    className={styled.edit}
+                    onClick={() => edit(item.orderId)}
+                  >
                     編輯
                   </button>
-                  <div className="orderDescription">
+                  <div className={styled.orderDescription}>
                     <div className="f-s w-100">
                       {item.customer && (
-                        <span className="customer single-ellipsis ph-5">
+                        <span
+                          className={`${styled.customer} single-ellipsis ph-5`}
+                        >
                           {`${item.customer} /`}
                         </span>
                       )}
-                      <span className="name single-ellipsis ph-5">
+                      <span className={`${styled.name} single-ellipsis ph-5`}>
                         {item.name}
                       </span>
                     </div>
@@ -90,7 +97,7 @@ const ShoppingCard = ({ onClose }) => {
                       <span className="ph-5">{`${currency}${
                         item.price * item.quantity
                       }`}</span>
-                      <span className="notes single-ellipsis ph-5">
+                      <span className={`${styled.notes} single-ellipsis ph-5`}>
                         {item.notes}
                       </span>
                     </div>
@@ -99,9 +106,9 @@ const ShoppingCard = ({ onClose }) => {
               );
             })}
           </div>
-          <button className="addProduct" onClick={handleFinisheOrder}>
+          <CustomButton handleClick={handleFinisheOrder}>
             送出定單 總價 {`${currency}${totalPrice}`}
-          </button>
+          </CustomButton>
         </div>
       ) : (
         <div>

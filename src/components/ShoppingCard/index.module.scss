@@ -1,3 +1,9 @@
+@mixin mobile {
+  @media (max-width: 740px) {
+    @content;
+  }
+}
+
 .emptyContent {
   height: 220px;
 
@@ -14,7 +20,7 @@
 
 .orderContainer {
   @include mobile {
-    height: 90vh;
+    height: 100%;
   }
 }
 
@@ -43,6 +49,7 @@
   width: 17%;
   cursor: pointer;
 }
+
 .orderDescription {
   width: 81%;
 }

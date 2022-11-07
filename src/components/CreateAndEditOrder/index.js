@@ -1,5 +1,7 @@
 import { useState } from "react";
+import styled from "./index.module.scss";
 import goBack from "../../images/goBack.svg";
+import CustomButton from "../CustomButton";
 import {
   getLocalStorage,
   setLocalStorage,
@@ -13,7 +15,11 @@ import { useStore } from "../../context/store";
 const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   const number = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
-    <select className="select t-20" value={quantity} onChange={handleQuantity}>
+    <select
+      className={`${styled.select} t-20`}
+      value={quantity}
+      onChange={handleQuantity}
+    >
       {isEdit && <option value="delete">移除</option>}
       {number.map((i) => (
         <option value={i} key={i}>
@@ -50,7 +56,7 @@ const Notes = ({ notes, handleInputChange }) => {
       <textarea
         name="notes"
         rows="3"
-        className="notesArea"
+        className={styled.notesArea}
         defaultValue={notes}
         onChange={handleInputChange}
       />
@@ -60,13 +66,13 @@ const Notes = ({ notes, handleInputChange }) => {
 
 const DeleteConfirm = ({ handleDeleteOrder, handleCancleDelete }) => {
   return (
-    <div className="deleteAlert">
-      <span className="deleteText">確定刪除</span>
-      <div className="deleteButtonGroup">
-        <button className="deleteButton" onClick={handleDeleteOrder}>
+    <div className={styled.deleteAlert}>
+      <span className={styled.deleteText}>確定刪除</span>
+      <div className={styled.deleteButtonGroup}>
+        <button className={styled.deleteButton} onClick={handleDeleteOrder}>
           確定
         </button>
-        <button className="deleteButton" onClick={handleCancleDelete}>
+        <button className={styled.deleteButton} onClick={handleCancleDelete}>
           取消
         </button>
       </div>
@@ -157,7 +163,7 @@ const CreateAndEditOrder = ({
   return (
     <div>
       {isEdit ? (
-        <div className="editContainer">
+        <div className={styled.editContainer}>
           {isShowDeleteAlert && (
             <DeleteConfirm
               handleDeleteOrder={handleDeleteOrder}
@@ -185,9 +191,7 @@ const CreateAndEditOrder = ({
               notes={singleOrder.notes}
               handleInputChange={handleInputChange}
             />
-            <button className="addProduct" onClick={handleEditOrder}>
-              修改
-            </button>
+            <CustomButton handleClick={handleEditOrder}>修改</CustomButton>
           </div>
         </div>
       ) : (
@@ -205,11 +209,11 @@ const CreateAndEditOrder = ({
             notes={singleOrder.notes}
             handleInputChange={handleInputChange}
           />
-          <button className="addProduct" onClick={handleAddOrder}>
+          <CustomButton handleClick={handleAddOrder}>
             {`新增${singleOrder.quantity}項商品至訂單 • ${currency}${
               price * singleOrder.quantity
             }`}
-          </button>
+          </CustomButton>
         </div>
       )}
     </div>

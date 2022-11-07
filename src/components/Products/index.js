@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "./index.module.scss";
 import imagePlaceholder from "../../images/empty.jpg";
 import { getLocalStorage } from "../../utils/Utils";
 import CustomPopup from "../CustomPopup";
@@ -35,26 +36,26 @@ function Product() {
           const { id, name, price, imageWebp, imagejpg } = item;
           return (
             <div
-              className="card mb-15"
+              className={`${styled.card} mb-15`}
               key={name}
               onClick={() => handleProductClick(id)}
             >
-              <div className="imgBox">
+              <div className={styled.imgBox}>
                 <picture>
                   <source
-                    className="img cover"
+                    className={styled.img}
                     srcSet={imageWebp}
                     type="image/webp"
                   />
                   <img
-                    className="img cover"
+                    className={styled.img}
                     src={imagejpg || imagePlaceholder}
                     alt="product"
                   />
                 </picture>
               </div>
               <h1 className="mv-2 t-16 ellipsis">{name}</h1>
-              <h1 className="mp0 t-16 tg-80">{`${currency}${price}`}</h1>
+              <h1 className="mp0 t-16 t-g-80">{`${currency}${price}`}</h1>
             </div>
           );
         })}
