@@ -6,6 +6,7 @@ import CustomPopup from "../CustomPopup";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import { productList } from "../../utils/common";
 
+const IMAGEURL = window.location.origin;
 function Product() {
   const currency = getLocalStorage("currency");
   const [isPopUp, setIsPopUp] = useState(false);
@@ -20,9 +21,6 @@ function Product() {
     setSelectedData(data);
     setIsPopUp(!isPopUp);
   };
-
-  console.log(window.location.origin);
-  const url = window.location.origin;
 
   return (
     <>
@@ -47,12 +45,12 @@ function Product() {
                 <picture>
                   <source
                     className={styled.img}
-                    srcSet={url + "/" + imageWebp}
+                    srcSet={IMAGEURL + "/" + imageWebp}
                     type="image/webp"
                   />
                   <img
                     className={styled.img}
-                    src={url + "/" + imagejpg || imagePlaceholder}
+                    src={IMAGEURL + "/" + imagejpg || imagePlaceholder}
                     alt="product"
                   />
                 </picture>
