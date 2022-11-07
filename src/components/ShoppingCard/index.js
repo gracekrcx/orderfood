@@ -41,9 +41,9 @@ const ShoppingCard = ({ onClose }) => {
 
   if (success) {
     return (
-      <div>
+      <div className="message">
         <CloseIcon onClose={onClose} />
-        <div className="successContent">
+        <div className="successContent f-w-c">
           <span className="successText">訂單已送出</span>
           <span className="successText">2 秒後關閉</span>
         </div>
@@ -53,9 +53,9 @@ const ShoppingCard = ({ onClose }) => {
 
   if (!data || data.length === 0) {
     return (
-      <div>
+      <div className="message">
         <CloseIcon onClose={onClose} />
-        <div className="empty f-c">
+        <div className="emptyContent f-c">
           <span>目前無資料</span>
         </div>
       </div>
@@ -65,12 +65,12 @@ const ShoppingCard = ({ onClose }) => {
   return (
     <div>
       {isShowOrder ? (
-        <div>
+        <div className="orderContainer">
           <CloseIcon onClose={onClose} />
           <div className="content">
             {data.map((item, index) => {
               return (
-                <div className="orderDetail" key={index}>
+                <div className="orderDetail mb-10" key={index}>
                   <button className="edit" onClick={() => edit(item.orderId)}>
                     編輯
                   </button>

@@ -12,6 +12,10 @@
   margin-left: 8px;
 }
 
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .mb-15 {
   margin-bottom: 15px;
 }
@@ -100,6 +104,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.f-w-c {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 /* ellipsis */

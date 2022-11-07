@@ -157,7 +157,7 @@ const CreateAndEditOrder = ({
   return (
     <div>
       {isEdit ? (
-        <>
+        <div className="editContainer">
           {isShowDeleteAlert && (
             <DeleteConfirm
               handleDeleteOrder={handleDeleteOrder}
@@ -165,7 +165,7 @@ const CreateAndEditOrder = ({
             />
           )}
           <img
-            className="w-30 ml-8 cursor"
+            className="w-30 cursor"
             src={goBack}
             alt="goBack"
             onClick={showOrder}
@@ -189,7 +189,7 @@ const CreateAndEditOrder = ({
               修改
             </button>
           </div>
-        </>
+        </div>
       ) : (
         <div>
           <h1 className="single-ellipsis">{name}</h1>

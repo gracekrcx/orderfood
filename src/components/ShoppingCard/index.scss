@@ -1,31 +1,50 @@
-.empty {
+.emptyContent {
   height: 220px;
+
+  @include mobile {
+    height: calc(100% - 40px);
+  }
+}
+
+.message {
+  @include mobile {
+    height: 100%;
+  }
+}
+
+.orderContainer {
+  @include mobile {
+    height: 90vh;
+  }
 }
 
 .content {
-  height: calc(100vh - 375px);
+  height: 300px;
   overflow-y: scroll;
   padding: 10px 0;
+
+  @include mobile {
+    height: 65%;
+  }
 }
 
 .orderDetail {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 0 auto 10px;
   font-size: 14px;
 
   @include mobile {
-    width: 90%;
+    width: 100%;
   }
 }
 
 .edit {
-  width: 16%;
+  width: 17%;
   cursor: pointer;
 }
 .orderDescription {
-  width: 84%;
+  width: 81%;
 }
 
 .customer {
@@ -54,8 +73,9 @@
 }
 
 .successContent {
-  display: flex;
   height: 200px;
-  flex-wrap: wrap;
-  align-content: center;
+
+  @include mobile {
+    height: calc(100% - 40px);
+  }
 }

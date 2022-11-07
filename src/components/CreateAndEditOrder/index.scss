@@ -23,16 +23,26 @@
   resize: none;
 }
 
+.editContainer {
+  @include mobile {
+    position: relative;
+  }
+}
+
 .deleteAlert {
   position: absolute;
   width: 390px;
   background: #fff;
   height: 380px;
-  opacity: 0.8;
+  opacity: 0.9;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .deleteText {
