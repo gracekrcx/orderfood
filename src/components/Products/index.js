@@ -47,12 +47,12 @@ function Product() {
                 <picture>
                   <source
                     className={styled.img}
-                    srcSet={url + imageWebp}
+                    srcSet={url + "/" + imageWebp}
                     type="image/webp"
                   />
                   <img
                     className={styled.img}
-                    src={url + imagejpg || imagePlaceholder}
+                    src={url + "/" + imagejpg || imagePlaceholder}
                     alt="product"
                   />
                 </picture>
