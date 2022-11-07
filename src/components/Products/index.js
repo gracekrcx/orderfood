@@ -21,6 +21,9 @@ function Product() {
     setIsPopUp(!isPopUp);
   };
 
+  console.log(window.location.origin);
+  const url = window.location.origin;
+
   return (
     <>
       {isPopUp && (
@@ -44,12 +47,12 @@ function Product() {
                 <picture>
                   <source
                     className={styled.img}
-                    srcSet={imageWebp}
+                    srcSet={url + imageWebp}
                     type="image/webp"
                   />
                   <img
                     className={styled.img}
-                    src={imagejpg || imagePlaceholder}
+                    src={url + imagejpg || imagePlaceholder}
                     alt="product"
                   />
                 </picture>
