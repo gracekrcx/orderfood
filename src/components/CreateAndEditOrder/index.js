@@ -29,40 +29,36 @@ const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   );
 };
 
-const Customer = ({ customer, handleInputChange }) => {
+const CustomerAndNotes = ({ customer, notes, handleInputChange }) => {
   return (
-    <div className="mv-10">
-      <label htmlFor="customer" className="db">
-        訂購人姓名
-      </label>
-      <input
-        type="text"
-        name="customer"
-        autoComplete="off"
-        value={customer}
-        onChange={handleInputChange}
-      />
-    </div>
+    <>
+      <div className="mv-10">
+        <label htmlFor="customer" className="db">
+          訂購人姓名
+        </label>
+        <input
+          type="text"
+          name="customer"
+          autoComplete="off"
+          value={customer}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="mv-10">
+        <label htmlFor="notes" className="db">
+          商品備註
+        </label>
+        <textarea
+          name="notes"
+          rows="3"
+          className={styled.notesArea}
+          defaultValue={notes}
+          onChange={handleInputChange}
+        />
+      </div>
+    </>
   );
 };
-
-const Notes = ({ notes, handleInputChange }) => {
-  return (
-    <div className="mv-10">
-      <label htmlFor="notes" className="db">
-        商品備註
-      </label>
-      <textarea
-        name="notes"
-        rows="3"
-        className={styled.notesArea}
-        defaultValue={notes}
-        onChange={handleInputChange}
-      />
-    </div>
-  );
-};
-
 const DeleteConfirm = ({ handleDeleteOrder, handleCancleDelete }) => {
   return (
     <div className={styled.deleteAlert}>
@@ -182,11 +178,8 @@ const CreateAndEditOrder = ({
               handleQuantity={handleQuantity}
               isEdit={isEdit}
             />
-            <Customer
+            <CustomerAndNotes
               customer={singleOrder.customer}
-              handleInputChange={handleInputChange}
-            />
-            <Notes
               notes={singleOrder.notes}
               handleInputChange={handleInputChange}
             />
@@ -200,11 +193,8 @@ const CreateAndEditOrder = ({
             quantity={singleOrder.quantity}
             handleQuantity={handleQuantity}
           />
-          <Customer
+          <CustomerAndNotes
             customer={singleOrder.customer}
-            handleInputChange={handleInputChange}
-          />
-          <Notes
             notes={singleOrder.notes}
             handleInputChange={handleInputChange}
           />
