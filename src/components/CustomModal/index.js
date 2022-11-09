@@ -4,8 +4,8 @@ import { createPortal } from "react-dom";
 export const CustomModal = ({ onClose, children }) => {
   const ModalDom = (
     <>
-      <div className={`${styled.overlay} bg-b`} onClick={onClose} />
-      <div className={styled.popup}>{children}</div>
+      <div className={`${styled.overlay} bg-black`} onClick={onClose} />
+      <div className={`${styled.popup} bg-white`}>{children}</div>
     </>
   );
 

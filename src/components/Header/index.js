@@ -6,7 +6,7 @@ import ShoppingCard from "../ShoppingCard";
 import { useStore } from "../../context/store";
 
 const HaveOrderIcon = () => {
-  return <div className={`${styled.haveOrderIcon} br-c`} />;
+  return <div className={`${styled.haveOrderIcon} br-c bg-red`} />;
 };
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
       <header className="f-b">
         <h1>Order Food</h1>
         <button
-          className={`${styled.btn} br-15 f-c cursor`}
+          className={`${styled.btn} br-15 f-c cursor bg-black t-white-100`}
           onClick={togglePopUp}
         >
           <img className={styled.shoppingLogo} src={logo} alt="shopping" />

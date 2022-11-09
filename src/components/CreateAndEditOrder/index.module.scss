@@ -38,10 +38,8 @@
 }
 
 .deleteText {
-  background-color: white;
   padding: 50px;
   font-size: 20px;
-  color: red;
 }
 
 .deleteButtonGroup {
@@ -50,18 +48,21 @@
   justify-content: center;
 }
 
-.deleteButton {
+.confirmButton {
   padding: 5px 20px;
-  font-size: 16px;
-  cursor: pointer;
+  margin: 5px 25px 5px 0px;
+  width: 90px;
+  border: 1px solid black;
+  &:hover {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
 }
 
-.deleteButton:first-child {
-  margin-right: 20px;
-}
-
-.deleteButton:last-child {
-  background-color: blue;
-  color: white;
-  border: 0;
+.cancelButton {
+  padding: 5px 20px;
+  margin: 5px 0;
+  width: 90px;
+  &:hover {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
 }

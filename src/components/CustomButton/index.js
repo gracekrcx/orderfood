@@ -1,11 +1,6 @@
-import styled from "./index.module.scss";
-
 const CustomButton = ({ children, handleClick }) => {
   return (
-    <button
-      className={`${styled.addProduct} f-c cursor t-16 bg-b t-w-100`}
-      onClick={handleClick}
-    >
+    <button className={`btn bg-black`} onClick={handleClick}>
       {children}
     </button>
   );

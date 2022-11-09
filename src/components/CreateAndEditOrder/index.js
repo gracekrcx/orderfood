@@ -55,15 +55,23 @@ const CustomerAndNotes = ({ customer, notes, handleInputChange }) => {
     </>
   );
 };
-const DeleteConfirm = ({ handleDeleteOrder, handleCancleDelete }) => {
+const DeleteConfirm = ({ handleDeleteOrder, handleCancelDelete }) => {
   return (
     <div className={styled.deleteAlert}>
-      <span className={styled.deleteText}>確定刪除</span>
+      <span className={`${styled.deleteText} bg-white t-red-100`}>
+        確定刪除?
+      </span>
       <div className={styled.deleteButtonGroup}>
-        <button className={styled.deleteButton} onClick={handleDeleteOrder}>
+        <button
+          className={`btn bg-gray t-black-100 ${styled.confirmButton}`}
+          onClick={handleDeleteOrder}
+        >
           確定
         </button>
-        <button className={styled.deleteButton} onClick={handleCancleDelete}>
+        <button
+          className={`btn bg-black ${styled.cancelButton}`}
+          onClick={handleCancelDelete}
+        >
           取消
         </button>
       </div>
@@ -144,7 +152,7 @@ const CreateAndEditOrder = ({
     showOrder();
   };
 
-  const handleCancleDelete = () => {
+  const handleCancelDelete = () => {
     setIsShowDeleteAlert(false);
   };
 
@@ -155,7 +163,7 @@ const CreateAndEditOrder = ({
           {isShowDeleteAlert && (
             <DeleteConfirm
               handleDeleteOrder={handleDeleteOrder}
-              handleCancleDelete={handleCancleDelete}
+              handleCancelDelete={handleCancelDelete}
             />
           )}
           <img

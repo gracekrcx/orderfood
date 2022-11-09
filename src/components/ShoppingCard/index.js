@@ -112,7 +112,10 @@ const ShoppingCard = ({ onClose }) => {
           <div className={styled.content}>
             {orderLists.map((item, index) => {
               return (
-                <div className={`${styled.orderDetail} mb-10`} key={index}>
+                <div
+                  className={`${styled.orderDetail} mb-10`}
+                  key={item.orderId}
+                >
                   <button
                     className={styled.edit}
                     onClick={() => edit(item.orderId)}
