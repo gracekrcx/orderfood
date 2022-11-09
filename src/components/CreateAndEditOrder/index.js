@@ -89,11 +89,11 @@ const CreateAndEditOrder = ({
   // 修改：name, price, quantity, customer, notes, orderId
   const { name, price, quantity = 1, customer = "", notes = "" } = selectedData;
   const [singleOrder, setSingleOrder] = useState({
-    name: name,
-    price: price,
-    quantity: quantity,
-    notes: notes,
-    customer: customer,
+    name,
+    price,
+    quantity,
+    notes,
+    customer,
   });
   const [isShowDeleteAlert, setIsShowDeleteAlert] = useState(false);
 
