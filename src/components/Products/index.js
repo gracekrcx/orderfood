@@ -1,14 +1,13 @@
 import { useState } from "react";
 import styled from "./index.module.scss";
 import imagePlaceholder from "../../images/empty.jpg";
-import { getLocalStorage } from "../../utils/Utils";
 import CustomModal from "../CustomModal";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import { productList } from "../../utils/common";
+import { currency } from "../../utils/common";
 
 const IMAGEURL = window.location.origin;
 function Product() {
-  const currency = getLocalStorage("currency");
   const [isPopUp, setIsPopUp] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
 
@@ -34,7 +33,7 @@ function Product() {
       )}
       <div className="container">
         {productList.map((item) => {
-          const { id, name, price, imageWebp, imagejpg } = item;
+          const { id, name, price, imageWebp, imageJpg } = item;
           return (
             <div
               className={`${styled.card} mb-15`}
@@ -50,7 +49,7 @@ function Product() {
                   />
                   <img
                     className={styled.img}
-                    src={IMAGEURL + "/" + imagejpg || imagePlaceholder}
+                    src={IMAGEURL + "/" + imageJpg || imagePlaceholder}
                     alt="product"
                   />
                 </picture>

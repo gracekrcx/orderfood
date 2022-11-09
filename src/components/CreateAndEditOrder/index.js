@@ -2,12 +2,8 @@ import { useState } from "react";
 import styled from "./index.module.scss";
 import goBack from "../../images/goBack.svg";
 import CustomButton from "../CustomButton";
-import {
-  getLocalStorage,
-  setLocalStorage,
-  calculateTotalPrice,
-} from "../../utils/Utils";
 import { useStore } from "../../context/store";
+import { currency } from "../../utils/common";
 
 // showOrder : edit 時返回購物車
 
@@ -81,9 +77,7 @@ const CreateAndEditOrder = ({
   showOrder = null,
   onClose = null,
 }) => {
-  const { setIsHaveOrder } = useStore();
-  const currency = getLocalStorage("currency");
-  const oldData = getLocalStorage("order") || [];
+  const { setIsHaveOrder, orderLists, handleUpdateOrderLists } = useStore();
   // selectedData
   // 新增：name, price
   // 修改：name, price, quantity, customer, notes, orderId
@@ -114,25 +108,24 @@ const CreateAndEditOrder = ({
   };
 
   const updateOrderData = (data) => {
-    data.length > 0 ? setIsHaveOrder(true) : setIsHaveOrder(false);
-    setLocalStorage("order", data);
-    calculateTotalPrice(data);
+    setIsHaveOrder(!!data.length > 0);
+    handleUpdateOrderLists(data);
   };
 
   const handleAddOrder = () => {
     const orderId = Date.now();
     const newOrder = { ...singleOrder, orderId };
-    const newData = [...oldData, newOrder];
+    const newData = [...orderLists, newOrder];
     updateOrderData(newData);
     onClose();
   };
 
   const handleEditOrder = () => {
     const orderId = selectedData.orderId;
-    // const index = oldData.findIndex((item) => {
+    // const index = orderLists.findIndex((item) => {
     //   return item.orderId === orderId;
     // });
-    const updateData = oldData.map((item) => {
+    const updateData = orderLists.map((item) => {
       if (item.orderId === orderId) {
         return { ...singleOrder, orderId };
       }
@@ -144,7 +137,7 @@ const CreateAndEditOrder = ({
 
   const handleDeleteOrder = () => {
     const orderId = selectedData.orderId;
-    const updateData = oldData.filter((item) => {
+    const updateData = orderLists.filter((item) => {
       return item.orderId !== orderId;
     });
     updateOrderData(updateData);

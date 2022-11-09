@@ -3,8 +3,8 @@ import styled from "./index.module.scss";
 import close from "../../images/close.svg";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import CustomButton from "../CustomButton";
-import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
 import { useStore } from "../../context/store";
+import { currency } from "../../utils/common";
 
 const CloseIcon = ({ onClose }) => {
   return (
@@ -13,10 +13,9 @@ const CloseIcon = ({ onClose }) => {
 };
 
 const ShoppingCard = ({ onClose }) => {
-  const { setIsHaveOrder } = useStore();
-  const currency = getLocalStorage("currency");
-  const totalPrice = getLocalStorage("totalPrice");
-  const data = getLocalStorage("order");
+  const { setIsHaveOrder, orderLists, totalPrice, handleUpdateOrderLists } =
+    useStore();
+
   const [isShowOrder, setIsShowOrder] = useState(true);
   const [success, setSuccess] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -31,8 +30,7 @@ const ShoppingCard = ({ onClose }) => {
       console.log("---> 打 api 送訂單");
       onClose();
       clearTimeout(timerRef.current);
-      setLocalStorage("order", []);
-      setLocalStorage("totalPrice", 0);
+      handleUpdateOrderLists([]);
       setIsHaveOrder(false);
     }
 
@@ -50,10 +48,10 @@ const ShoppingCard = ({ onClose }) => {
     return () => {
       clearTimeout(timerRef.current);
     };
-  }, [countdown, onClose, setIsHaveOrder]);
+  }, [countdown, onClose, setIsHaveOrder, handleUpdateOrderLists]);
 
   const edit = (orderId) => {
-    const result = data.find((item) => item.orderId === orderId);
+    const result = orderLists.find((item) => item.orderId === orderId);
     setEditData(result);
     setIsShowOrder(false);
   };
@@ -95,7 +93,7 @@ const ShoppingCard = ({ onClose }) => {
     );
   }
 
-  if (!data || data.length === 0) {
+  if (!orderLists || orderLists.length === 0) {
     return (
       <div className={styled.message}>
         <CloseIcon onClose={onClose} />
@@ -112,7 +110,7 @@ const ShoppingCard = ({ onClose }) => {
         <div className={styled.orderContainer}>
           <CloseIcon onClose={onClose} />
           <div className={styled.content}>
-            {data.map((item, index) => {
+            {orderLists.map((item, index) => {
               return (
                 <div className={`${styled.orderDetail} mb-10`} key={index}>
                   <button
