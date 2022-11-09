@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "./index.module.scss";
-import closs from "../../images/close.svg";
+import close from "../../images/close.svg";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import CustomButton from "../CustomButton";
 import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
@@ -8,7 +8,7 @@ import { useStore } from "../../context/store";
 
 const CloseIcon = ({ onClose }) => {
   return (
-    <img className="w-30 cursor" src={closs} alt="closs" onClick={onClose} />
+    <img className="w-30 cursor" src={close} alt="close" onClick={onClose} />
   );
 };
 
@@ -20,6 +20,37 @@ const ShoppingCard = ({ onClose }) => {
   const [isShowOrder, setIsShowOrder] = useState(true);
   const [success, setSuccess] = useState(false);
   const [editData, setEditData] = useState(null);
+  const [countdown, setCountdown] = useState(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    console.log("--> 倒數", countdown);
+
+    if (countdown === 0) {
+      // 倒數結束，打 API 新增訂單
+      console.log("---> 打 api 送訂單");
+      onClose();
+      clearTimeout(timerRef.current);
+      setLocalStorage("order", []);
+      setLocalStorage("totalPrice", 0);
+      setIsHaveOrder(false);
+    }
+
+    if (!countdown) return;
+    console.log("--> 開始 倒數 ---->");
+    const id = setTimeout(
+      () =>
+        setCountdown((pre) => {
+          return pre - 1;
+        }),
+      1000
+    );
+    timerRef.current = id;
+
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  }, [countdown, onClose, setIsHaveOrder]);
 
   const edit = (orderId) => {
     const result = data.find((item) => item.orderId === orderId);
@@ -31,14 +62,17 @@ const ShoppingCard = ({ onClose }) => {
     setIsShowOrder(true);
   };
 
-  const handleFinisheOrder = () => {
+  const handleFinishOrder = () => {
+    // user 送出訂單，送 api 前倒數
     setSuccess(true);
-    setLocalStorage("order", []);
-    setLocalStorage("totalPrice", 0);
-    setIsHaveOrder(false);
-    setTimeout(() => {
-      onClose();
-    }, 2000);
+    setCountdown(5);
+  };
+
+  const handleUnsendFinishOrder = () => {
+    console.log("unsend");
+    setSuccess(false);
+    setCountdown(null);
+    clearTimeout(timerRef.current);
   };
 
   if (success) {
@@ -46,8 +80,16 @@ const ShoppingCard = ({ onClose }) => {
       <div className={styled.message}>
         <CloseIcon onClose={onClose} />
         <div className={`${styled.successContent} f-w-c`}>
-          <span className={styled.successText}>訂單已送出</span>
-          <span className={styled.successText}>2 秒後關閉</span>
+          <span className={`${styled.successText} w-100 ta-c`}>訂單已送出</span>
+          <span className={`${styled.counter} w-100 ta-c mb-15`}>
+            {`${countdown > 0 ? countdown : ""}...秒後關閉`}
+          </span>
+          <button
+            className={styled.unsendFinishOrder}
+            onClick={handleUnsendFinishOrder}
+          >
+            取消送出訂單
+          </button>
         </div>
       </div>
     );
@@ -106,7 +148,7 @@ const ShoppingCard = ({ onClose }) => {
               );
             })}
           </div>
-          <CustomButton handleClick={handleFinisheOrder}>
+          <CustomButton handleClick={handleFinishOrder}>
             送出定單 總價 {`${currency}${totalPrice}`}
           </CustomButton>
         </div>

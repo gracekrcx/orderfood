@@ -96,6 +96,11 @@
   cursor: pointer;
 }
 
+/* text-align */
+.ta-c {
+  text-align: center;
+}
+
 /* flex */
 
 .f-b {
@@ -120,6 +125,7 @@
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+  justify-content: center;
 }
 
 /* ellipsis */
