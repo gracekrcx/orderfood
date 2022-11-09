@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "./index.module.scss";
 import imagePlaceholder from "../../images/empty.jpg";
 import { getLocalStorage } from "../../utils/Utils";
-import CustomPopup from "../CustomPopup";
+import CustomModal from "../CustomModal";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import { productList } from "../../utils/common";
 
@@ -25,12 +25,12 @@ function Product() {
   return (
     <>
       {isPopUp && (
-        <CustomPopup onClose={togglePopUp}>
+        <CustomModal onClose={togglePopUp}>
           <CreateAndEditOrder
             onClose={togglePopUp}
             selectedData={selectedData}
           />
-        </CustomPopup>
+        </CustomModal>
       )}
       <div className="container">
         {productList.map((item) => {

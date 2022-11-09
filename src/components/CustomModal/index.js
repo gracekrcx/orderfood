@@ -1,7 +1,8 @@
 import styled from "./index.module.scss";
+import { createPortal } from "react-dom";
 
-const CustomPopup = ({ onClose, children }) => {
-  return (
+export const CustomModal = ({ onClose, children }) => {
+  const ModalDom = (
     <div className={styled.overlay} onClick={onClose}>
       <div
         className={styled.popup}
@@ -13,6 +14,9 @@ const CustomPopup = ({ onClose, children }) => {
       </div>
     </div>
   );
+
+  const target = document.body;
+  return createPortal(ModalDom, target);
 };
 
-export default CustomPopup;
+export default CustomModal;

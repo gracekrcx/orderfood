@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "./index.module.scss";
 import logo from "../../images/shopping-cart.svg";
-import CustomPopup from "../CustomPopup";
+import CustomModal from "../CustomModal";
 import ShoppingCard from "../ShoppingCard";
 import { useStore } from "../../context/store";
 
@@ -20,9 +20,9 @@ const Header = () => {
   return (
     <>
       {isPopUp && (
-        <CustomPopup onClose={togglePopUp}>
+        <CustomModal onClose={togglePopUp}>
           <ShoppingCard onClose={togglePopUp} />
-        </CustomPopup>
+        </CustomModal>
       )}
       <header className="f-b">
         <h1>Order Food</h1>
