@@ -197,8 +197,14 @@ const CreateAndEditOrder = ({
               customer={singleOrder.customer}
               notes={singleOrder.notes}
               handleInputChange={handleInputChange}
+              isCustomerTouched={isCustomerTouched}
             />
-            <CustomButton handleClick={handleEditOrder}>修改</CustomButton>
+            <CustomButton
+              handleClick={handleEditOrder}
+              disabled={singleOrder.customer.length <= 0}
+            >
+              修改
+            </CustomButton>
           </div>
         </div>
       ) : (
