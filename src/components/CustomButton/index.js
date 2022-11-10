@@ -1,6 +1,6 @@
 const CustomButton = ({ children, handleClick }) => {
   return (
-    <button className={`btn bg-black`} onClick={handleClick}>
+    <button className="btn bg-black" onClick={handleClick}>
       {children}
     </button>
   );

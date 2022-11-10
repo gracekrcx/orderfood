@@ -83,7 +83,7 @@ const ShoppingCard = ({ onClose }) => {
             {`${countdown > 0 ? countdown : ""}...秒後關閉`}
           </span>
           <button
-            className={styled.unsendFinishOrder}
+            className={`btn bg-black ${styled.unsendFinishOrder}`}
             onClick={handleUnsendFinishOrder}
           >
             取消送出訂單
