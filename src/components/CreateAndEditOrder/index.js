@@ -50,7 +50,7 @@ const CustomerAndNotes = ({
           <span className="t-red-100 t-12 db">此欄位必填</span>
         )}
       </div>
-      <div className="mv-10">
+      <div className="mv-5">
         <label htmlFor="notes" className="db">
           商品備註
         </label>
