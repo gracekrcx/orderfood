@@ -1,16 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "./index.module.scss";
-import close from "../../images/close.svg";
 import CreateAndEditOrder from "../CreateAndEditOrder";
 import CustomButton from "../CustomButton";
-import { useStore } from "../../context/store";
-import { currency } from "../../utils/common";
-
-const CloseIcon = ({ onClose }) => {
-  return (
-    <img className="w-30 cursor" src={close} alt="close" onClick={onClose} />
-  );
-};
+import { useStore } from "../../context/Store";
+import { currency } from "../../utils/Common";
+import CloseIcon from "../CloseIcon";
 
 const ShoppingCard = ({ onClose }) => {
   const { setIsHaveOrder, orderLists, totalPrice, handleUpdateOrderLists } =
@@ -150,7 +144,7 @@ const ShoppingCard = ({ onClose }) => {
             })}
           </div>
           <CustomButton handleClick={handleFinishOrder}>
-            送出定單 總價 {`${currency}${totalPrice}`}
+            送出訂單 總價 {`${currency}${totalPrice}`}
           </CustomButton>
         </div>
       ) : (

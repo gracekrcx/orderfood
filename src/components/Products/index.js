@@ -3,8 +3,7 @@ import styled from "./index.module.scss";
 import imagePlaceholder from "../../images/empty.jpg";
 import CustomModal from "../CustomModal";
 import CreateAndEditOrder from "../CreateAndEditOrder";
-import { productList } from "../../utils/common";
-import { currency } from "../../utils/common";
+import { currency, productList } from "../../utils/Common";
 
 const IMAGEURL = window.location.origin;
 function Product() {

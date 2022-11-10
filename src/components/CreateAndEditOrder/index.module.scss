@@ -6,10 +6,23 @@
 
 .select {
   width: 50px;
-  height: 30px;
+  height: 26px;
+  margin: 0 0 20px 0;
+}
+
+.customer {
+  font-size: 16px;
+  height: 22px;
+}
+
+.customerContainer {
+  height: 70px;
+  margin: 5px 0;
 }
 
 .notesArea {
+  font-size: 16px;
+  height: 60px;
   width: 100%;
   box-sizing: border-box;
   resize: none;

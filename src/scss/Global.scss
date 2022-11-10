@@ -19,6 +19,12 @@ $black-100: #000;
   border: 1px solid black;
 }
 
+.btn:disabled {
+  cursor: auto;
+  background-color: #c1bcbc;
+  border: 1px solid #c1bcbc;
+}
+
 /* margin */
 .mp0 {
   padding: 0;
@@ -56,6 +62,10 @@ $black-100: #000;
 }
 
 /* font-size */
+
+.t-12 {
+  font-size: 12px;
+}
 
 .t-16 {
   font-size: 16px;

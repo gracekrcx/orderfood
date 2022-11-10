@@ -1,6 +1,6 @@
-const CustomButton = ({ children, handleClick }) => {
+const CustomButton = ({ children, handleClick, disabled = false }) => {
   return (
-    <button className="btn bg-black" onClick={handleClick}>
+    <button disabled={disabled} className="btn bg-black" onClick={handleClick}>
       {children}
     </button>
   );

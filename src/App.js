@@ -1,15 +1,16 @@
 import "./scss/App.scss";
 import Products from "./components/Products";
 import Header from "./components/Header";
-import StoreContextProvider from "./context/store";
+import StoreContextProvider from "./context/Store";
+import PageContainer from "./components/PageContainer";
 
 function App() {
   return (
     <StoreContextProvider>
-      <div className="app">
+      <PageContainer>
         <Header />
         <Products />
-      </div>
+      </PageContainer>
     </StoreContextProvider>
   );
 }

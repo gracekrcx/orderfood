@@ -3,7 +3,7 @@ import styled from "./index.module.scss";
 import logo from "../../images/shopping-cart.svg";
 import CustomModal from "../CustomModal";
 import ShoppingCard from "../ShoppingCard";
-import { useStore } from "../../context/store";
+import { useStore } from "../../context/Store";
 
 const HaveOrderIcon = () => {
   return <div className={`${styled.haveOrderIcon} br-c bg-red`} />;

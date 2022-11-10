@@ -2,8 +2,9 @@ import { useState } from "react";
 import styled from "./index.module.scss";
 import goBack from "../../images/goBack.svg";
 import CustomButton from "../CustomButton";
-import { useStore } from "../../context/store";
-import { currency } from "../../utils/common";
+import { useStore } from "../../context/Store";
+import { currency } from "../../utils/Common";
+import CloseIcon from "../CloseIcon";
 
 // showOrder : edit 時返回購物車
 
@@ -11,7 +12,7 @@ const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   const number = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
     <select
-      className={`${styled.select} t-20 cursor`}
+      className={`${styled.select} t-16 cursor`}
       value={quantity}
       onChange={handleQuantity}
     >
@@ -25,20 +26,29 @@ const QuantitySelect = ({ quantity, handleQuantity, isEdit }) => {
   );
 };
 
-const CustomerAndNotes = ({ customer, notes, handleInputChange }) => {
+const CustomerAndNotes = ({
+  customer,
+  notes,
+  handleInputChange,
+  isCustomerTouched,
+}) => {
   return (
     <>
-      <div className="mv-10">
+      <div className={styled.customerContainer}>
         <label htmlFor="customer" className="db">
-          訂購人姓名
+          訂購人姓名(必填)
         </label>
         <input
+          className={styled.customer}
           type="text"
           name="customer"
           autoComplete="off"
           value={customer}
           onChange={handleInputChange}
         />
+        {isCustomerTouched && customer.length <= 0 && (
+          <span className="t-red-100 t-12 db">此欄位必填</span>
+        )}
       </div>
       <div className="mv-10">
         <label htmlFor="notes" className="db">
@@ -98,6 +108,7 @@ const CreateAndEditOrder = ({
     customer,
   });
   const [isShowDeleteAlert, setIsShowDeleteAlert] = useState(false);
+  const [isCustomerTouched, setIsCustomerTouched] = useState(false);
 
   const handleQuantity = (e) => {
     if (e.target.value === "delete") {
@@ -110,6 +121,9 @@ const CreateAndEditOrder = ({
   };
 
   const handleInputChange = (e) => {
+    if (e.target.name === "customer") {
+      setIsCustomerTouched(true);
+    }
     setSingleOrder((preData) => {
       return { ...preData, [e.target.name]: e.target.value };
     });
@@ -189,6 +203,7 @@ const CreateAndEditOrder = ({
         </div>
       ) : (
         <div>
+          <CloseIcon onClose={onClose} />
           <h1 className="single-ellipsis">{name}</h1>
           <QuantitySelect
             quantity={singleOrder.quantity}
@@ -198,8 +213,12 @@ const CreateAndEditOrder = ({
             customer={singleOrder.customer}
             notes={singleOrder.notes}
             handleInputChange={handleInputChange}
+            isCustomerTouched={isCustomerTouched}
           />
-          <CustomButton handleClick={handleAddOrder}>
+          <CustomButton
+            handleClick={handleAddOrder}
+            disabled={singleOrder.customer.length <= 0}
+          >
             {`新增${singleOrder.quantity}項商品至訂單 • ${currency}${
               price * singleOrder.quantity
             }`}
