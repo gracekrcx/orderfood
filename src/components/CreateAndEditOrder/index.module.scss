@@ -1,8 +1,4 @@
-@mixin mobile {
-  @media (max-width: 740px) {
-    @content;
-  }
-}
+@import "../../scss/mixin.scss";
 
 .select {
   width: 50px;
