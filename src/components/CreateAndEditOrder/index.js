@@ -5,6 +5,7 @@ import CustomButton from "../CustomButton";
 import { useStore } from "../../context/Store";
 import { currency } from "../../utils/Common";
 import CloseIcon from "../CloseIcon";
+import { setLocalStorage, getLocalStorage } from "../../utils/Utils";
 
 // showOrder : edit 時返回購物車
 
@@ -95,7 +96,7 @@ const CreateAndEditOrder = ({
   showOrder = null,
   onClose = null,
 }) => {
-  const { setIsHaveOrder, orderLists, handleUpdateOrderLists } = useStore();
+  const { handleUpdateOrderLists } = useStore();
   // selectedData
   // 新增：name, price
   // 修改：name, price, quantity, customer, notes, orderId
@@ -129,13 +130,23 @@ const CreateAndEditOrder = ({
     });
   };
 
+  const getOrderLists = () => {
+    return getLocalStorage("orderLists") || [];
+  };
+
   const updateOrderData = (data) => {
-    setIsHaveOrder(!!data.length > 0);
+    /*
+    1. 更新 localStorage 
+    2. 更新 isHaveOrder
+    3. 更新 total price
+    */
     handleUpdateOrderLists(data);
+    setLocalStorage("orderLists", data);
   };
 
   const handleAddOrder = () => {
     const orderId = Date.now();
+    const orderLists = getOrderLists();
     const newOrder = { ...singleOrder, orderId };
     const newData = [...orderLists, newOrder];
     updateOrderData(newData);
@@ -147,6 +158,7 @@ const CreateAndEditOrder = ({
     // const index = orderLists.findIndex((item) => {
     //   return item.orderId === orderId;
     // });
+    const orderLists = getOrderLists();
     const updateData = orderLists.map((item) => {
       if (item.orderId === orderId) {
         return { ...singleOrder, orderId };
@@ -154,16 +166,17 @@ const CreateAndEditOrder = ({
       return item;
     });
     updateOrderData(updateData);
-    showOrder();
+    showOrder(updateData);
   };
 
   const handleDeleteOrder = () => {
     const orderId = selectedData.orderId;
+    const orderLists = getOrderLists();
     const updateData = orderLists.filter((item) => {
       return item.orderId !== orderId;
     });
     updateOrderData(updateData);
-    showOrder();
+    showOrder(updateData);
   };
 
   const handleCancelDelete = () => {
@@ -184,7 +197,7 @@ const CreateAndEditOrder = ({
             className="w-30 cursor"
             src={goBack}
             alt="goBack"
-            onClick={showOrder}
+            onClick={() => showOrder(null)}
           />
           <div>
             <h1 className="single-ellipsis">{name}</h1>

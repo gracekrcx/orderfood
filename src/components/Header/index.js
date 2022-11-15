@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "./index.module.scss";
 import logo from "../../images/shopping-cart.svg";
 import CustomModal from "../CustomModal";
 import ShoppingCard from "../ShoppingCard";
 import { useStore } from "../../context/Store";
+import { getLocalStorage } from "../../utils/Utils";
 
 const HaveOrderIcon = () => {
   return <div className={`${styled.haveOrderIcon} br-c bg-red`} />;
@@ -11,7 +12,12 @@ const HaveOrderIcon = () => {
 
 const Header = () => {
   const [isPopUp, setIsPopUp] = useState(false);
-  const { isHaveOrder } = useStore();
+  const { isHaveOrder, setIsHaveOrder } = useStore();
+
+  useEffect(() => {
+    const data = getLocalStorage("orderLists") || [];
+    data.length > 0 && setIsHaveOrder(true);
+  }, [setIsHaveOrder]);
 
   const togglePopUp = () => {
     setIsPopUp(!isPopUp);

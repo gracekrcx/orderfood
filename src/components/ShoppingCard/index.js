@@ -5,31 +5,33 @@ import CustomButton from "../CustomButton";
 import { useStore } from "../../context/Store";
 import { currency } from "../../utils/Common";
 import CloseIcon from "../CloseIcon";
+import { getLocalStorage, setLocalStorage } from "../../utils/Utils";
 
 const ShoppingCard = ({ onClose }) => {
-  const { setIsHaveOrder, orderLists, totalPrice, handleUpdateOrderLists } =
-    useStore();
-
+  const { setIsHaveOrder, totalPrice } = useStore();
   const [isShowOrder, setIsShowOrder] = useState(true);
   const [success, setSuccess] = useState(false);
   const [editData, setEditData] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const timerRef = useRef(null);
 
+  const [orderLists, setOrderLists] = useState([]);
   useEffect(() => {
-    console.log("--> 倒數", countdown);
+    const data = getLocalStorage("orderLists") || [];
+    setOrderLists(data);
+  }, []);
 
+  useEffect(() => {
     if (countdown === 0) {
       // 倒數結束，打 API 新增訂單
       console.log("---> 打 api 送訂單");
       onClose();
       clearTimeout(timerRef.current);
-      handleUpdateOrderLists([]);
+      setLocalStorage("orderLists", []);
       setIsHaveOrder(false);
     }
 
     if (!countdown) return;
-    console.log("--> 開始 倒數 ---->");
     const id = setTimeout(
       () =>
         setCountdown((pre) => {
@@ -42,7 +44,7 @@ const ShoppingCard = ({ onClose }) => {
     return () => {
       clearTimeout(timerRef.current);
     };
-  }, [countdown, onClose, setIsHaveOrder, handleUpdateOrderLists]);
+  }, [countdown, onClose, setIsHaveOrder]);
 
   const edit = (orderId) => {
     const result = orderLists.find((item) => item.orderId === orderId);
@@ -50,7 +52,10 @@ const ShoppingCard = ({ onClose }) => {
     setIsShowOrder(false);
   };
 
-  const showOrder = () => {
+  const showOrder = (data) => {
+    if (data) {
+      setOrderLists(data);
+    }
     setIsShowOrder(true);
   };
 
@@ -61,7 +66,6 @@ const ShoppingCard = ({ onClose }) => {
   };
 
   const handleUnsendFinishOrder = () => {
-    console.log("unsend");
     setSuccess(false);
     setCountdown(null);
     clearTimeout(timerRef.current);
@@ -104,7 +108,7 @@ const ShoppingCard = ({ onClose }) => {
         <div className={styled.orderContainer}>
           <CloseIcon onClose={onClose} />
           <div className={styled.content}>
-            {orderLists.map((item, index) => {
+            {orderLists.map((item) => {
               return (
                 <div
                   className={`${styled.orderDetail} mb-10`}

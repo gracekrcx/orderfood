@@ -17,11 +17,10 @@ const calculateTotalPrice = (data) => {
 
 const StoreContextProvider = ({ children }) => {
   const [isHaveOrder, setIsHaveOrder] = useState(false);
-  const [orderLists, setOrderLists] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const handleUpdateOrderLists = (data) => {
-    setOrderLists(data);
+    setIsHaveOrder(!!data.length > 0);
     const price = calculateTotalPrice(data);
     setTotalPrice(price);
   };
@@ -31,7 +30,6 @@ const StoreContextProvider = ({ children }) => {
       value={{
         isHaveOrder,
         setIsHaveOrder,
-        orderLists,
         totalPrice,
         handleUpdateOrderLists,
       }}
