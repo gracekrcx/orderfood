@@ -57,3 +57,7 @@ function calculateTotalPrice(data) {
   setTotalPrice(price);
 }
 ```
+
+
+![image](https://bit.ly/3U5CZuB)
+![image](https://bit.ly/3i80G8r)
