@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/orderfood/static/css/main.f5ec4615.css",
-    "main.js": "/orderfood/static/js/main.7cd046a3.js",
+    "main.js": "/orderfood/static/js/main.4d8f4f25.js",
     "static/js/787.da5a610c.chunk.js": "/orderfood/static/js/787.da5a610c.chunk.js",
     "static/media/goBack.svg": "/orderfood/static/media/goBack.ea17a42d746c0d15461d9f016b6abe1b.svg",
-    "index.html": "/orderfood/index.html",
     "static/media/shopping-cart.svg": "/orderfood/static/media/shopping-cart.7b94b2ad68cc5536f12b0523b9635622.svg",
+    "index.html": "/orderfood/index.html",
     "static/media/close.svg": "/orderfood/static/media/close.b56d6120f88b406b5422ebe2583007ff.svg",
     "main.f5ec4615.css.map": "/orderfood/static/css/main.f5ec4615.css.map",
-    "main.7cd046a3.js.map": "/orderfood/static/js/main.7cd046a3.js.map",
+    "main.4d8f4f25.js.map": "/orderfood/static/js/main.4d8f4f25.js.map",
     "787.da5a610c.chunk.js.map": "/orderfood/static/js/787.da5a610c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f5ec4615.css",
-    "static/js/main.7cd046a3.js"
+    "static/js/main.4d8f4f25.js"
   ]
 }
